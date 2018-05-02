@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    HOME PAGE
+{% endblock %}
+{% block body %}
+    <p>
+        Vous etes correctement authentifié
+    </p>
+    <p>Bonjour
+        {{app.user.username}}</p>
+
+    <p>
+        <a href="admin_page">Admin</a>
+    </p>
+    <p>
+        <a href="client_page">Client</a>
+    </p>
+{% endblock %}
+for

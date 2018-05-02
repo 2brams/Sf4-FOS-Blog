@@ -1,0 +1,87 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Connexion!{% endblock %}
+{% block fos_user_content %}
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+        <div class="app-login">
+            <div class="text-center box shadow-5 animated fadeInLeft b-r-4 p-a-20">
+                <h1 class="f-4 m-a-0">Acme</h1>
+                <h4>
+                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                </h4>
+                <form class="text-left" role="form" action="index.html">
+                    <div class="form-group has-feedback">
+                        <input disabled class="form-control" value="{{app.user.email}}" type="email">
+                        <span class="form-control-feedback">
+                            <i class="fa fa-fw fa-envelope"></i>
+                        </span>
+                    </div>
+                    <a class="btn btn-primary btn-block m-b-15" href="{{ path('fos_user_security_logout') }}">
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a>
+                    <a href="{{path('home_page')}}">
+                        <i class="fa fa-fw fa-hand-o-left"></i>
+                        <small>Retour à l'accueil</small>
+                    </a>
+                </form>
+            </div>
+        </div>
+
+    {% else %}
+
+        <div class="error" data-is-error="{{ error ? error.messageKey|trans(error.messageData, 'security') : false }}"></div>
+
+        <div class="app-login">
+            <div class="text-center box shadow-5 animated fadeInLeft b-r-4 p-a-20">
+                <h1 class="f-4 m-a-0">Acme</h1>
+                <h4>Sign in to start your session</h4>
+
+                <form action="{{ path("fos_user_security_check") }}" method="post" class="text-left" role="form" >
+
+                {% if csrf_token %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                {% endif %}
+
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" placeholder="{{ 'security.login.username'|trans }}" name="_username" value="{{ last_username }}" required="required" autocomplete="username"/>
+                    <span class="form-control-feedback">
+                        <i class="fa fa-fw fa-user"></i>
+                    </span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" placeholder="{{ 'security.login.password'|trans }}" id="password" name="_password" required="required" autocomplete="current-password"/>
+                    <span class="form-control-feedback">
+                        <i class="fa fa-fw fa-key"></i>
+                    </span>
+                </div>
+
+                {# <input type="checkbox" id="remember_me" name="_remember_me" value="on"/> #}
+                {# <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label> #}
+                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-primary btn-block m-b-15"/>
+                <a href="{{path('home_page')}}">
+                    <i class="fa fa-fw fa-hand-o-left"></i>
+                    <small>Retour à l'accueil</small>
+                </a>
+            </form>
+        </div>
+    </div>
+
+{% endif %}
+
+{% endblock fos_user_content %}
+
+{% block javascripts %}
+<script type="text/javascript">
+
+    /* document.addEventListener('DOMContentLoaded', function () {
+        var error = document.querySelector('.error');
+        var isError = error.dataset.isError;
+        if (isError) {
+            $.gritter.add({title: isError, text: 'Le nom d\'utilisateur ou le mot de passe est incorrect', time: 10000, sticky: false});
+        }
+
+    });*/
+</script>
+{% endblock %}
