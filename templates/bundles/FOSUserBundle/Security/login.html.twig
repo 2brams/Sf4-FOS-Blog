@@ -75,13 +75,32 @@
 {% block javascripts %}
 <script type="text/javascript">
 
-    /* document.addEventListener('DOMContentLoaded', function () {
+     document.addEventListener('DOMContentLoaded', function () {
         var error = document.querySelector('.error');
         var isError = error.dataset.isError;
         if (isError) {
-            $.gritter.add({title: isError, text: 'Le nom d\'utilisateur ou le mot de passe est incorrect', time: 10000, sticky: false});
+           // $.noty.defaults.killer = true;
+
+            noty({
+                text: isError,
+                layout: 'topRight',
+                timeout: 10000,
+                progressBar: true,
+                theme: "relax",
+                type: 'error',// success, error, warning, information, notification
+
+                animation: {
+                    open: 'animated fadeInDown',
+                    close: 'animated fadeOutUp',
+                    easing: 'swing',
+                    speed: 500
+                },
+                 closeWith: ['click','hover'], // ['click', 'button', 'hover', 'backdrop']
+            });
+
         }
 
-    });*/
+    });
+
 </script>
 {% endblock %}
