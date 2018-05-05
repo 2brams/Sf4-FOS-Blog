@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {% block title %}Welcome!{% endblock %}
+        </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{asset('landing/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('landing/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('landing/css/themify-icons.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('landing/css/animate.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('landing/css/hamburgers.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('landing/css/animsition.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('landing/css/select2.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('landing/css/daterangepicker.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('landing/css/slick.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('landing/css/lightbox.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('landing/css/util.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('landing/css/main.css')}}">
+
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body class="animsition">
+        {% block body %}{% endblock %}
+
+
+
+
+        <script type="text/javascript" src="{{asset('landing/js/jquery-3.2.1.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('landing/js/animsition.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('landing/js/popper.js')}}"></script>
+        <script type="text/javascript" src="{{asset('landing/js/bootstrap.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('landing/js/select2.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('landing/js/moment.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('landing/js/daterangepicker.js')}}"></script>
+        <script type="text/javascript" src="{{asset('landing/js/slick.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('landing/js/slick-custom.js')}}"></script>
+        <script type="text/javascript" src="{{asset('landing/js/parallax100.js')}}"></script>
+
+        <script type="text/javascript">
+            $('.parallax100').parallax100();
+        </script>
+
+        <script type="text/javascript" src="{{asset('landing/js/countdowntime.js')}}"></script>
+        <script type="text/javascript" src="{{asset('landing/js/lightbox.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('landing/js/main.js')}}"></script>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

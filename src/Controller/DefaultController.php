@@ -14,7 +14,7 @@ class DefaultController extends Controller
      */
     public function index()
     {
-        return $this->render('homepage.html.twig');
+        return $this->render('landing/homepage.html.twig');
     }
     /**
      *@Route("/login_ok",name="login_ok")
@@ -38,7 +38,7 @@ class DefaultController extends Controller
      */
     public function admin()
     {
-        return $this->render('admin.html.twig');
+        return $this->render('admin/admin.html.twig');
     }
 
     /**

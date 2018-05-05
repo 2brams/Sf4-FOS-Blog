@@ -28,5 +28,18 @@ services:
         class: App\EventListener\RegistrationListener
         arguments: []
         tags:
-           -{name: kernel.event_subscriber}
+           - {name: kernel.event_subscriber}
 
+    upload.annotation_reader:
+        public: true
+        class: App\Annotation\UploadAnnotationReader
+        arguments: ["@annotations.reader"]
+
+    upload.handler:
+        class: App\Handler\UploadHandler
+
+    upload.subscriber:
+        class: App\EventListener\UploadSubscriber
+        arguments: ["@upload.annotation_reader","@upload.handler"]
+        tags:
+           - { name: doctrine.event_subscriber, connection: default }
