@@ -1,8 +1,9 @@
 {% extends "admin/base_admin.html.twig" %}
 
 {% block title %}
-    New Post
+    New Slide
 {% endblock %}
+
 {% block body %}
     <div class="row">
         <div class="col-xs-12">
@@ -10,13 +11,14 @@
                 <header>
                     <h2>New</h2>
                     <div>
-                        <a class="btn btn-pill btn-default u-posRelative" href="{{ path('post_index') }}">
+                        <a class="btn btn-pill btn-default u-posRelative" href="{{ path('slide_index') }}">
                             <i class="fa fa-list "></i>
                         </a>
                     </div>
                 </header>
                 <div class="hide id" data-id-file="{{form.file.vars.id}}"></div>
-                {{ include('post/_form.html.twig') }}
+
+                {{ include('slide/_form.html.twig') }}
 
             </div>
 
@@ -25,13 +27,11 @@
 {% endblock %}
 
 {% block javascripts %}
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var file = document.querySelector('.id');
             var id = file.dataset.idFile;
 
-            $('textarea').summernote();
             $('#' + id).fileinput({
                 language: 'fr',
                 allowedFileExtensions: [
@@ -44,6 +44,11 @@
                 showCancel: true,
                 showUploadedThumbs: true
             });
+            $('.select2').select2({
+                //    placeholder: 'Select an option'
+            });
+            $('.select2').val(null);
+            $('.select2').trigger('change');
         });
     </script>
 {% endblock %}

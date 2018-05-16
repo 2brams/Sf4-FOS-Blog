@@ -8,8 +8,23 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{asset('admin/css/vendor.css')}}"/>
+        <link rel="stylesheet" href="{{asset('admin/css/dataTables.bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('admin/css/lightgallery.min.css')}}">
+        <link rel="stylesheet" href="{{asset('admin/css/summernote.css')}}">
+        <link rel="stylesheet" href="{{asset('admin/css/fileinput.min.css')}}">
+        <link rel="stylesheet" href="{{asset('admin/css/select2.min.css')}}">
+        <link rel="stylesheet" href="{{asset('admin/css/animate.css')}}">
+        <link rel="stylesheet" href="{{asset('admin/css/noty.css')}}">
+        <link rel="stylesheet" href="{{asset('admin/css/metroui.css')}}">
+        <link rel="stylesheet" href="{{asset('admin/css/mint.css')}}">
         <link rel="stylesheet" href="{{asset('admin/css/chl.css')}}">
         <link rel="stylesheet" href="{{asset('admin/css/theme-peter-river.css')}}">
+        <style>
+            .btn-spacing {
+                margin-right: 5px;
+                margin-bottom: 5px !important;
+            }
+        </style>
 
         {% block stylesheets %}{% endblock %}
     </head>
@@ -138,25 +153,7 @@
                                         </a>
                                         <ul class="nav nav-sub nav-stacked">
                                             <li>
-                                                <a href="app-calendar.html">Calendar</a>
-                                            </li>
-                                            <li>
-                                                <a href="app-gallery.html">Gallery</a>
-                                            </li>
-                                            <li>
-                                                <a href="app-login.html">Login</a>
-                                            </li>
-                                            <li>
-                                                <a href="app-register.html">Register</a>
-                                            </li>
-                                            <li>
-                                                <a href="app-forgot.html">Forgot</a>
-                                            </li>
-                                            <li>
-                                                <a href="app-404.html">404</a>
-                                            </li>
-                                            <li>
-                                                <a href="app-500.html">500</a>
+                                                <a href="{{path('post_index')}}">Article</a>
                                             </li>
 
                                             <!-- BEGIN: mail -->
@@ -193,7 +190,6 @@
                         <!-- END: .side-content -->
                     </aside>
                     <!-- END: .app-side -->
-
 
                     <!-- begin .app-main -->
                     <div class="app-main">
@@ -239,8 +235,43 @@
         <span class="fa fa-angle-up" id="totop" data-plugin="totop"></span>
 
         <script src="{{asset('admin/js/vendor.js')}} "></script>
+        <script src="{{asset('admin/js/jquery.dataTables.min.js')}} "></script>
+        <script src="{{asset('admin/js/dataTables.bootstrap.min.js')}} "></script>
+        <script src="{{asset('admin/js/lightgallery-all.min.js')}} "></script>
+        {# <script src="{{asset('admin/js/jquery.validate.min.js')}} "></script> #}
+        <script src="{{asset('admin/js/summernote.js')}} "></script>
+        <script src="{{asset('admin/js/fileinput.min.js')}} "></script>
+        <script src="{{asset('admin/js/fr.js')}} "></script>
+        <script src="{{asset('admin/js/select2.min.js')}} "></script>
+        {# <script src="{{asset('admin/js/jquery.noty.packaged.min.js')}} "></script> #}
+        <script src="{{asset('admin/js/noty.js')}} "></script>
         <script src="{{asset('admin/js/chl.js')}} "></script>
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script>
+                $('#delete').on('click', function (e) {
+                    e.preventDefault();
+                    var n = new Noty({
+                        text: 'Être vous sur de vouloir effectuer cette action?',
+                        layout: 'center',
+                        theme: 'metroui',
+                        type: 'alert',
+                        modal: true,
+                        buttons: [
+                            Noty.button('OUI', 'btn btn-danger btn-spacing', function () {
+                                n.close();
+                                $('#deleteForm').submit();
+                            }),
+
+                            Noty.button('NON', 'btn btn-success btn-spacing', function () {
+                                n.close();
+                            })
+                        ]
+                    }).show();
+                    $('.noty_buttons').addClass('text-center');
+                });
+            </script>
+
+        {% endblock %}
 
     </body>
 </html>

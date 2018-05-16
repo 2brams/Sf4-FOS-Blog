@@ -4,21 +4,42 @@
     Edit Post
 {% endblock %}
 {% block body %}
-    <h1>Edit Post</h1>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <header>
+                    <h2>Edit</h2>
+                    <div>
+                        <a class="btn btn-pill btn-default u-posRelative" href="{{ path('post_index') }}">
+                            <i class="fa fa-list "></i>
+                        </a>
+                    </div>
+                    <div>
+                        {{ include('post/_delete_form.html.twig') }}
+                    </div>
+                </header>
+                <div class="hide id" data-id-file="{{form.file.vars.id}}"></div>
 
-    {% if post.file %}
-        <td>
-            <img src="{{asset(post.file.pathname)}}" width="100" alt="">
-        </td>
-    {% else %}
-        <td>
-            Aucune image
-        </td>
-    {% endif %}
+                {{ include('post/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
-    {{ include('post/_form.html.twig', {'button_label': 'Update'}) }}
+            </div>
 
-    <a href="{{ path('post_index') }}">back to list</a>
+        </div>
+    </div>
+{% endblock %}
 
-    {{ include('post/_delete_form.html.twig') }}
+{% block javascripts %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var file = document.querySelector('.id');
+            var id = file.dataset.idFile;
+
+            $('textarea').summernote();
+            $('#' + id).fileinput({
+                language: 'fr',
+                allowedFileExtensions: ['jpg', 'png', 'gif']
+            });
+        });
+    </script>
 {% endblock %}

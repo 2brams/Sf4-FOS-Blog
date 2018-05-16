@@ -1,17 +1,16 @@
 {% extends "admin/base_admin.html.twig" %}
 
 {% block title %}
-    Post index
+    Slide index
 {% endblock %}
-{% block stylesheets %}{% endblock %}
 {% block body %}
     <div class="row">
         <div class="col-sm-12">
             <div class="box">
                 <header>
-                    <h3>Liste Article</h3>
+                    <h3>Liste Slide</h3>
                     <div class="box-tool">
-                        <a class="btn btn-pill btn-success u-posRelative" href="{{ path('post_new') }}">
+                        <a class="btn btn-pill btn-success u-posRelative" href="{{ path('slide_new') }}">
                             <i class="fa fa-fw fa-plus"></i>
                             <span class="waves"></span>
                         </a>
@@ -22,33 +21,32 @@
                         <thead>
                             <tr class=" bg-belize-hole">
                                 <th>#</th>
-                                <th>Titre</th>
-                                <th>Contenu</th>
+                                <th>GrandTitre</th>
+                                <th>PetitTitre</th>
                                 <th>Image</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for post in posts %}
+                            {% for slide in slides %}
                                 <tr>
                                     <td>{{ loop.index }}</td>
-                                    <td>{{ post.name }}</td>
-                                    <td>{{ post.content| truncate(300, true, '...') |raw }}</td>
-                                    {% if post.file %}
+                                    <td>{{ slide.grandTitre }}</td>
+                                    <td>{{ slide.petitTitre }}</td>
+                                    {% if slide.file %}
                                         <td class="text-center">
-                                            <img class="img-thumbnail img-responsive" src="{{asset(post.file.pathname)| imagine_filter('squared_thumbnail')}}" alt="">
-
+                                            <img class="img-thumbnail img-responsive" src="{{asset(slide.file.pathname)| imagine_filter('squared_thumbnail')}}" alt="">
                                         </td>
                                     {% else %}
-                                        <td>
-                                            Aucune image
+                                        <td class="text-center">
+                                            <img class="img-thumbnail img-responsive" src="{{asset('admin/img/no_image_available.jpg') | imagine_filter('squared_thumbnail')}}" alt="">
                                         </td>
                                     {% endif %}
                                     <td class="text-center">
-                                        <a class="btn btn-circle btn-default" href="{{ path('post_show', {'id': post.id}) }}">
+                                        <a class="btn btn-circle btn-default" href="{{ path('slide_show', {'id': slide.id}) }}">
                                             <i class="fa fa-fw fa-eye"></i>
                                         </a>
-                                        <a class="btn btn-circle btn-info" href="{{ path('post_edit', {'id': post.id}) }}">
+                                        <a class="btn btn-circle btn-info" href="{{ path('slide_edit', {'id': slide.id}) }}">
                                             <i class="fa fa-fw fa-edit"></i>
                                         </a>
                                     </td>

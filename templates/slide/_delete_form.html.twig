@@ -1,0 +1,8 @@
+{# <form method="post" action="{{ path('slide_delete', {'id': slide.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');"> #}
+<form method="post" action="{{ path('slide_delete', {'id': slide.id}) }}" id="deleteForm">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ slide.id) }}">
+    <button id="delete" class="btn btn-pill btn-danger u-posRelative">
+        <i class="fa fa-trash-o "></i>
+    </button>
+</form>

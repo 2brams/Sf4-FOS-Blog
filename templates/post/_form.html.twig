@@ -1,4 +1,71 @@
-{{ form_start(form) }}
+<div class="box-body collapse in">
+    {{ form_start(form,{ 'attr': {'class': 'form-horizontal'}}) }}
+
+    {% if post.file %}
+        <div class="row" data-plugin="lightgallery" data-selector=".thumbnail" data-thumbnail="true">
+            <div class="col-md-offset-4 col-md-4">
+                <div class="thumbnail" data-src="{{asset(post.file.pathname)}}">
+                    <img src="{{asset(post.file.pathname)}}" alt="" data-toggle="tooltip">
+                    <div class="caption text-center">
+                        <span>
+                            <strong>Cliquer pour agrandir</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {# Aucune image #}
+    {% endif %}
+
+    <hr class="b-s-dashed">
+    <div class="form-group">
+        <label for="{{form.name.vars.id}}" class="col-sm-2 control-label">Titre</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="{{form.name.vars.full_name}}" id="{{form.name.vars.id}}" value="{{form.name.vars.value}}">
+            {% do
+                form.name.setRendered %}
+            {% for error in form.name.vars.errors %}
+
+                <small class="text-muted">
+                    {{error.message}}
+                </small>
+            {% endfor %}
+        </div>
+    </div>
+    <hr class="b-s-dashed">
+    <div class="form-group">
+        <label for="{{form.content.vars.id}}" class="col-sm-2 control-label">Contenu</label>
+        <div class="col-sm-10">
+            <textarea type="text" class="form-control" name="{{form.content.vars.full_name}}" id="{{form.content.vars.id}}">{{form.content.vars.value}}</textarea>
+            {% do
+                form.content.setRendered %}
+            {% for error in form.content.vars.errors %}
+
+                <small class="text-muted">
+                    {{error.message}}
+                </small>
+            {% endfor %}
+        </div>
+    </div>
+    <hr class="b-s-dashed">
+    <div class="form-group">
+        <label for="{{form.file.vars.id}}" class="col-sm-2 control-label">Image</label>
+        <div class="col-sm-10">
+            <div class="file-loading">
+                <input type="file" name="{{form.file.vars.full_name}}" id="{{form.file.vars.id}}">
+            </div>
+            {% do
+                form.file.setRendered %}
+            {% for error in form.file.vars.errors %}
+                <small class="text-muted">
+                    {{error.message}}
+                </small>
+            {% endfor %}
+        </div>
+    </div>
+    <hr class="b-s-dashed">
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+    <button class="btn btn-success pull-right">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+</div>
