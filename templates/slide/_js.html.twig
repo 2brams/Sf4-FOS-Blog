@@ -1,0 +1,61 @@
+<script>
+    $(document).ready(function () {
+        $('#form').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                'slide[grandTitre]': {
+                    validators: {
+                        notEmpty: {}
+                    }
+                },
+                'slide[petitTitre]': {
+                    validators: {
+                        notEmpty: {}
+                    }
+                },
+                'slide[apparitionG]': {
+                    validators: {
+                        notEmpty: {}
+                    }
+                },
+                'slide[apparitionP]': {
+                    validators: {
+                        notEmpty: {}
+                    }
+                }
+            }
+        }).on('success.form.bv', function (e) {
+            // e.preventDefault();
+            $('#form').bootstrapValidator('defaultSubmit');
+        });
+        $('#slide_file').fileinput({
+            language: 'fr',
+            allowedFileExtensions: [
+                'jpeg', 'png', 'gif', 'jpg'
+            ],
+            showCaption: true,
+            showPreview: true,
+            showRemove: true,
+            showUpload: false,
+            showCancel: true,
+            showUploadedThumbs: true
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var grandValue = document.querySelector('.apparitionG_value');
+        var petitValue = document.querySelector('.apparitionP_value');
+
+        var apparitionGValue = grandValue.dataset.apparitiongValue;
+        var apparitionPValue = petitValue.dataset.apparitionpValue;
+       // alert(apparitionGValue);
+        $('#slide_apparitionG').selectpicker('val', apparitionGValue);
+        $('#slide_apparitionP').selectpicker('val', apparitionPValue);
+
+        // $('#slide_apparitionG').selectpicker('val', apparitionGValue, {});
+        // $('#slide_apparitionG').trigger('change');
+    });
+</script>

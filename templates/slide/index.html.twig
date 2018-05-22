@@ -3,26 +3,27 @@
 {% block title %}
     Slide index
 {% endblock %}
+{% set side_home = side_home | merge({'home': true}) %}
+{% set side_home = side_home | merge({'slide': true}) %}
 {% block body %}
     <div class="row">
         <div class="col-sm-12">
             <div class="box">
                 <header>
-                    <h3>Liste Slide</h3>
+                    <h3>Slide | Liste</h3>
                     <div class="box-tool">
-                        <a class="btn btn-pill btn-success u-posRelative" href="{{ path('slide_new') }}">
-                            <i class="fa fa-fw fa-plus"></i>
-                            <span class="waves"></span>
+                        <a class=" mdl-button mdl-button--icon mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--green mdl-color-text--white" href="{{ path('slide_new') }}">
+                            <i class="material-icons">add</i>
                         </a>
                     </div>
                 </header>
                 <div class="box-body">
-                    <table id="list" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                    <table id="list" class="mdl-data-table  mdl-data-table--selectable mdl-shadow--2dp" width="100%" cellspacing="0">
                         <thead>
-                            <tr class=" bg-belize-hole">
-                                <th>#</th>
-                                <th>GrandTitre</th>
-                                <th>PetitTitre</th>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">#</th>
+                                <th class="mdl-data-table__cell--non-numeric">GrandTitre</th>
+                                <th class="mdl-data-table__cell--non-numeric">PetitTitre</th>
                                 <th>Image</th>
                                 <th>Actions</th>
                             </tr>
@@ -30,9 +31,9 @@
                         <tbody>
                             {% for slide in slides %}
                                 <tr>
-                                    <td>{{ loop.index }}</td>
-                                    <td>{{ slide.grandTitre }}</td>
-                                    <td>{{ slide.petitTitre }}</td>
+                                    <td class="mdl-data-table__cell--non-numeric">{{ loop.index }}</td>
+                                    <td class="mdl-data-table__cell--non-numeric">{{ slide.grandTitre }}</td>
+                                    <td class="mdl-data-table__cell--non-numeric">{{ slide.petitTitre }}</td>
                                     {% if slide.file %}
                                         <td class="text-center">
                                             <img class="img-thumbnail img-responsive" src="{{asset(slide.file.pathname)| imagine_filter('squared_thumbnail')}}" alt="">
@@ -43,11 +44,11 @@
                                         </td>
                                     {% endif %}
                                     <td class="text-center">
-                                        <a class="btn btn-circle btn-default" href="{{ path('slide_show', {'id': slide.id}) }}">
-                                            <i class="fa fa-fw fa-eye"></i>
+                                        <a class=" btn-spacing mdl-button mdl-button--icon mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" href="{{ path('slide_show', {'id': slide.id}) }}">
+                                            <i class="material-icons">visibility</i>
                                         </a>
-                                        <a class="btn btn-circle btn-info" href="{{ path('slide_edit', {'id': slide.id}) }}">
-                                            <i class="fa fa-fw fa-edit"></i>
+                                        <a class=" btn-spacing mdl-button mdl-button--icon mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--primary" href="{{ path('slide_edit', {'id': slide.id}) }}">
+                                            <i class="material-icons">edit</i>
                                         </a>
                                     </td>
                                 </tr>

@@ -6,6 +6,7 @@ use App\Annotation\Uploadable;
 use App\Annotation\UploadableField;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SlideRepository")
@@ -47,8 +48,8 @@ class Slide
 
     /**
      * @UploadableField(filename="filename",path="uploads")
+     * @Assert\Image(minWidth="1900",minHeight="925")
      */
-    //  * @Assert\Image(maxWidth="100",maxHeight="100")
     private $file;
 
     /**

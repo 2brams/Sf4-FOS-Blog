@@ -2,7 +2,7 @@
 <form method="post" action="{{ path('slide_delete', {'id': slide.id}) }}" id="deleteForm">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ slide.id) }}">
-    <button id="delete" class="btn btn-pill btn-danger u-posRelative">
-        <i class="fa fa-trash-o "></i>
+    <button id="delete" class="btn-spacing mdl-button mdl-button--icon mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--red mdl-color-text--white">
+        <i class="material-icons">delete</i>
     </button>
 </form>

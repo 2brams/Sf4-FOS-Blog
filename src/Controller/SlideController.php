@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
-use DateTime;
 use App\Entity\Slide;
 use App\Form\SlideType;
 use App\Repository\SlideRepository;
+use DateTime;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * @Route("admin/slide")
@@ -27,8 +27,7 @@ class SlideController extends Controller
     /**
      * @Route("/new", name="slide_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
-    {
+    function new (Request $request): Response {
         $slide = new Slide();
         $form = $this->createForm(SlideType::class, $slide);
         $form->handleRequest($request);
@@ -44,6 +43,7 @@ class SlideController extends Controller
 
         return $this->render('slide/new.html.twig', [
             'slide' => $slide,
+            'image' => false,
             'form' => $form->createView(),
         ]);
     }
@@ -68,11 +68,13 @@ class SlideController extends Controller
             $slide->setUpdatedAt(new DateTime());
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('slide_edit', ['id' => $slide->getId()]);
+            return $this->redirectToRoute('slide_show', ['id' => $slide->getId()]);
+
         }
 
         return $this->render('slide/edit.html.twig', [
             'slide' => $slide,
+            'image' => true,
             'form' => $form->createView(),
         ]);
     }
@@ -82,7 +84,7 @@ class SlideController extends Controller
      */
     public function delete(Request $request, Slide $slide): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$slide->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $slide->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($slide);
             $em->flush();

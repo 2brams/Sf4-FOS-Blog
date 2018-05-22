@@ -17,13 +17,21 @@
         <link rel="stylesheet" href="{{asset('admin/css/noty.css')}}">
         <link rel="stylesheet" href="{{asset('admin/css/metroui.css')}}">
         <link rel="stylesheet" href="{{asset('admin/css/mint.css')}}">
+        <link rel="stylesheet" href="{{asset('admin/css/material.min.css')}}">
+        <link rel="stylesheet" href="{{asset('admin/css/bootstrapValidator.min.css')}}">
+        <link rel="stylesheet" href="{{asset('admin/css/bootstrap-select.min.css')}}">
         <link rel="stylesheet" href="{{asset('admin/css/chl.css')}}">
         <link rel="stylesheet" href="{{asset('admin/css/theme-peter-river.css')}}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <style>
             .btn-spacing {
                 margin-right: 5px;
                 margin-bottom: 5px !important;
             }
+            .form-control-feedback {
+                right: 30px !important;
+            }
+
         </style>
 
         {% block stylesheets %}{% endblock %}
@@ -103,7 +111,7 @@
                                 <!-- BEGIN: nav-content -->
                                 <ul class="metismenu nav nav-inverse nav-bordered nav-stacked" data-plugin="metismenu">
                                     <li>
-                                        <a class="active" href="#">
+                                        <a class="" href="#">
                                             <span class="nav-icon">
                                                 <i class="fa fa-fw fa-cogs"></i>
                                             </span>
@@ -111,33 +119,23 @@
                                         </a>
                                     </li>
                                     <li class="nav-divider"></li>
-                                    <li class="nav-header">MENU</li>
-                                    <li>
+                                    {# <li class="nav-header">MENU</li> #}
+                                    <li class="{{side_home.home ? 'active'}}">
                                         <a href="javascript:;">
                                             <span class="nav-icon">
-                                                <i class="fa fa-fw fa-bar-chart-o"></i>
+                                                <i class="fa fa-fw fa-home"></i>
                                             </span>
-                                            <span class="nav-title">Chart</span>
+                                            <span class="nav-title">Accueil</span>
                                             <span class="nav-tools">
                                                 <i class="fa fa-fw arrow"></i>
-                                                <span class="label label-primary">4</span>
                                             </span>
                                         </a>
                                         <ul class="nav nav-sub nav-stacked">
                                             <li>
-                                                <a href="chart-quick.html">Quick Chart</a>
+                                                <a class="{{side_home.slide ? 'active'}}" href="{{path('slide_index')}}">Slide</a>
                                             </li>
                                             <li>
-                                                <a href="chart-chartjs.html">Chart.js</a>
-                                            </li>
-                                            <li>
-                                                <a href="chart-morris.html">Morris</a>
-                                            </li>
-                                            <li>
-                                                <a href="chart-flot.html">Flot</a>
-                                            </li>
-                                            <li>
-                                                <a href="chart-inline.html">Inline charts</a>
+                                                <a href="{{path('post_index')}}">Post</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -238,13 +236,16 @@
         <script src="{{asset('admin/js/jquery.dataTables.min.js')}} "></script>
         <script src="{{asset('admin/js/dataTables.bootstrap.min.js')}} "></script>
         <script src="{{asset('admin/js/lightgallery-all.min.js')}} "></script>
-        {# <script src="{{asset('admin/js/jquery.validate.min.js')}} "></script> #}
         <script src="{{asset('admin/js/summernote.js')}} "></script>
         <script src="{{asset('admin/js/fileinput.min.js')}} "></script>
         <script src="{{asset('admin/js/fr.js')}} "></script>
         <script src="{{asset('admin/js/select2.min.js')}} "></script>
-        {# <script src="{{asset('admin/js/jquery.noty.packaged.min.js')}} "></script> #}
+        <script src="{{asset('admin/js/material.min.js')}} "></script>
         <script src="{{asset('admin/js/noty.js')}} "></script>
+        <script src="{{asset('admin/js/bootstrapValidator.min.js')}} "></script>
+        <script src="{{asset('admin/js/fr_FR.js')}} "></script>
+        <script src="{{asset('admin/js/bootstrap-select.min.js')}} "></script>
+        <script src="{{asset('admin/js/defaults-fr_FR.min.js')}} "></script>
         <script src="{{asset('admin/js/chl.js')}} "></script>
         {% block javascripts %}
             <script>
@@ -270,8 +271,6 @@
                     $('.noty_buttons').addClass('text-center');
                 });
             </script>
-
         {% endblock %}
-
     </body>
 </html>

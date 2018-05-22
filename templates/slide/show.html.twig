@@ -1,53 +1,23 @@
-{% extends "admin/base_admin.html.twig" %}
+{% extends "admin/base_admin.html.twig"%}
 
 {% block title %}
     Slide
 {% endblock %}
+{% set side_home = side_home | merge({'home': true}) %}
+{% set side_home = side_home | merge({'slide': true}) %}
 
-{% set apparitions = [
-    {
-        option: "Fondu vers vers le bas",
-        value: "fadeInDown"
-    }, {
-        option: "Fondu vers le haut",
-        value: "fadeInUp"
-    }, {
-        option: "Agrandir",
-        value: "zoomIn"
-    }, {
-        option: "Rouler vers l'intérieur",
-        value: "rollIn"
-    }, {
-        option: "Vitesse de la lumière",
-        value: "lightSpeedIn"
-    }, {
-        option: "Glisser vers le haut",
-        value: "slideInUp"
-    }, {
-        option: "Tourner en bas à gauche",
-        value: "rotateInDownLeft"
-    }, {
-        option: "Tourner en haut à droite",
-        value: "rotateInUpRight"
-    }, {
-        option: "Tourner vers l'intérieur",
-        value: "rotateIn"
-    }
-] %}
 {% block body %}
     <div class="row">
         <div class="col-sm-12">
             <div class="box">
                 <header>
-                    <h2>Détails</h2>
+                    <h3>Slide | Détails</h3>
                     <div>
-                        <a class="btn btn-pill btn-default u-posRelative" href="{{ path('slide_index') }}">
-                            <i class="fa fa-list "></i>
+                        <a class=" btn-spacing mdl-button mdl-js-button mdl-button--icon mdl-button--fab  mdl-js-ripple-effect" href="{{ path('slide_index') }}">
+                            <i class="material-icons">list</i>
                         </a>
-                    </div>
-                    <div>
-                        <a class="btn btn-pill btn-info u-posRelative" href="{{ path('slide_edit', {'id': slide.id}) }}">
-                            <i class="fa fa-edit"></i>
+                        <a class=" btn-spacing mdl-button mdl-button--icon mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--primary" href="{{ path('slide_edit', {'id': slide.id}) }}">
+                            <i class="material-icons">edit</i>
                         </a>
                     </div>
                     <div>
@@ -58,7 +28,7 @@
                     <div class="box">
                         <header>
                             <h4>
-                                <strong></strong>
+                                <strong>Titres</strong>
                             </h4>
                             <div class="box-tools">
                                 <a class="fa fa-fw fa-minus" href="#" data-box="collapse"></a>
@@ -67,59 +37,47 @@
                         </header>
                         <div class="box-body b-t collapse in">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-6 text-center">
                                     <strong>Grand Titre:</strong>
+                                    <br/>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield">
+                                        <input class="mdl-textfield__input" disabled="disabled" type="text" value="{{slide.grandTitre}}"/>
+                                        <label class="mdl-textfield__label">text</label>
+                                    </div>
                                 </div>
-                                <div class="col-md-4 text-center">
-                                    <h4>
-                                        <strong>
-                                            {{slide.grandTitre}}
-                                            <hr class="b-w-2 b-wet-asphalt">
-                                        </strong>
-                                    </h4>
-                                </div>
-                                <div class="col-md-2">
-                                    <strong>Apparition:</strong>
-                                </div>
-                                <div class="col-md-4 text-center">
-                                    <h4>
-                                        {% for app in apparitions %}
-                                            {% if app.value == slide.apparitionG%}
-                                                <strong>
-                                                    {{app.option}}
-                                                    <hr class="b-w-2 b-wet-asphalt">
-                                                </strong>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </h4>
+                                <div class="col-md-6 text-center">
+                                    {% for app in apparitions %}
+                                        {% if app.value == slide.apparitionG%}
+                                            <strong>Apparition:</strong>
+                                            <br/>
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield">
+                                                <input class="mdl-textfield__input" disabled="disabled" type="text" value="{{app.option}}" />
+                                                <label class="mdl-textfield__label" >text</label>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-6 text-center">
                                     <strong>Petit Titre:</strong>
+                                    <br/>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield">
+                                        <input class="mdl-textfield__input" disabled="disabled" type="text" value="{{slide.petitTitre}}"/>
+                                        <label class="mdl-textfield__label">text</label>
+                                    </div>
                                 </div>
-                                <div class="col-md-4 text-center">
-                                    <h4>
-                                        <strong>
-                                            {{slide.petitTitre}}
-                                            <hr class="b-w-2 b-wet-asphalt">
-                                        </strong>
-                                    </h4>
-                                </div>
-                                <div class="col-md-2">
-                                    <strong>Apparition:</strong>
-                                </div>
-                                <div class="col-md-4 text-center">
-                                    <h4>
-                                        {% for app in apparitions %}
-                                            {% if app.value == slide.apparitionP%}
-                                                <strong>
-                                                    {{app.option}}
-                                                    <hr class="b-w-2 b-wet-asphalt">
-                                                </strong>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </h4>
+                                <div class="col-md-6 text-center">
+                                    {% for app in apparitions %}
+                                        {% if app.value == slide.apparitionP%}
+                                            <strong>Apparition:</strong>
+                                            <br/>
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield">
+                                                <input class="mdl-textfield__input" disabled="disabled" type="text" value="{{app.option}}"/>
+                                                <label class="mdl-textfield__label" id="pp">text</label>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -130,7 +88,7 @@
                                 <strong>Image</strong>
                             </h4>
                             <div class="box-tools">
-                                <!-- <a class="fa fa-fw fa-minus" href="#" data-box="collapse"></a> -->
+                                <a class="fa fa-fw fa-minus" href="#" data-box="collapse"></a>
                                 <!-- <a class="fa fa-fw fa-square-o" href="#" data-fullscreen="box"></a> -->
                             </div>
                         </header>
@@ -162,15 +120,12 @@
                                 </td>
                             {% endif %}
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
 {% block javascripts %}
-
     {{parent()}}
 {% endblock %}

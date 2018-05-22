@@ -2,3 +2,38 @@ twig:
     paths: ['%kernel.project_dir%/templates']
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        side_home: { home: false,
+                slide: false,
+                slug: 'about' }
+
+        apparitions: [
+                        {
+                            option: "Fondu vers vers le bas",
+                            value: "fadeInDown"
+                        }, {
+                            option: "Fondu vers le haut",
+                            value: "fadeInUp"
+                        }, {
+                            option: "Agrandir",
+                            value: "zoomIn"
+                        }, {
+                            option: "Rouler vers l'intérieur",
+                            value: "rollIn"
+                        }, {
+                            option: "Vitesse de la lumière",
+                            value: "lightSpeedIn"
+                        }, {
+                            option: "Glisser vers le haut",
+                            value: "slideInUp"
+                        }, {
+                            option: "Tourner en bas à gauche",
+                            value: "rotateInDownLeft"
+                        }, {
+                            option: "Tourner en haut à droite",
+                            value: "rotateInUpRight"
+                        }, {
+                            option: "Tourner vers l'intérieur",
+                            value: "rotateIn"
+                        }
+                     ]

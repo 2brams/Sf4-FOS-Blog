@@ -1,38 +1,10 @@
-{% set apparitions = [
-    {
-        option: "Fondu vers vers le bas",
-        value: "fadeInDown"
-    }, {
-        option: "Fondu vers le haut",
-        value: "fadeInUp"
-    }, {
-        option: "Agrandir",
-        value: "zoomIn"
-    }, {
-        option: "Rouler vers l'intérieur",
-        value: "rollIn"
-    }, {
-        option: "Vitesse de la lumière",
-        value: "lightSpeedIn"
-    }, {
-        option: "Glisser vers le haut",
-        value: "slideInUp"
-    }, {
-        option: "Tourner en bas à gauche",
-        value: "rotateInDownLeft"
-    }, {
-        option: "Tourner en haut à droite",
-        value: "rotateInUpRight"
-    }, {
-        option: "Tourner vers l'intérieur",
-        value: "rotateIn"
-    }
-] %}
+<div class="hide apparitionG_value" data-apparitiong-value="{{form.apparitionG.vars.value}}"></div>
+<div class="hide apparitionP_value" data-apparitionp-value="{{form.apparitionP.vars.value}}"></div>
 
 <div class="box-body collapse in">
-    {{ form_start(form,{ 'attr': {'class': 'form-horizontal'}}) }}
+    {{ form_start(form,{ 'attr': {'class': 'form-horizontal','id': 'form'}}) }}
 
-    {% if slide.file %}
+    {% if slide.file and slide.file.path == 'uploads' %}
         <div class="row" data-plugin="lightgallery" data-selector=".thumbnail" data-thumbnail="true">
             <div class="col-md-offset-4 col-md-4">
                 <div class="thumbnail" data-src="{{asset(slide.file.pathname)}}">
@@ -45,7 +17,7 @@
                 </div>
             </div>
         </div>
-    {% elseif slide.grandTitre != '' %}
+    {% elseif image %}
         <div class="row" data-plugin="lightgallery" data-selector=".thumbnail" data-thumbnail="true">
             <div class="col-md-offset-4 col-md-4">
                 <div class="thumbnail" data-src="{{asset('admin/img/no_image_available.jpg')}}">
@@ -59,12 +31,12 @@
     <div class="form-group">
         <label for="{{form.grandTitre.vars.id}}" class="col-sm-2 control-label">Grand Titre</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="{{form.grandTitre.vars.full_name}}" id="{{form.grandTitre.vars.id}}" value="{{form.grandTitre.vars.value}}">
+            <input type="text" placeholder="Le grand titre" class="form-control" name="{{form.grandTitre.vars.full_name}}" id="{{form.grandTitre.vars.id}}" value="{{form.grandTitre.vars.value}}">
             {% do
                 form.grandTitre.setRendered %}
             {% for error in form.grandTitre.vars.errors %}
 
-                <small class="text-muted">
+                <small class="text-danger">
                     {{error.message}}
                 </small>
             {% endfor %}
@@ -73,7 +45,7 @@
     <div class="form-group">
         <label for="{{form.apparitionG.vars.id}}" class="col-sm-2 control-label">Apparition</label>
         <div class="col-sm-10">
-            <select class="select2 form-control" name="{{form.apparitionG.vars.full_name}}" id="{{form.apparitionG.vars.id}}">
+            <select class="form-control" name="{{form.apparitionG.vars.full_name}}" id="{{form.apparitionG.vars.id}}">
                 {% for app in apparitions %}
                     <option value="{{app.value}}">{{app.option}}</option>
                 {% endfor %}
@@ -82,7 +54,7 @@
                 form.apparitionG.setRendered %}
             {% for error in form.apparitionG.vars.errors %}
 
-                <small class="text-muted">
+                <small class="text-danger">
                     {{error.message}}
                 </small>
             {% endfor %}
@@ -93,12 +65,12 @@
     <div class="form-group">
         <label for="{{form.petitTitre.vars.id}}" class="col-sm-2 control-label">Petit Titre</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="{{form.petitTitre.vars.full_name}}" id="{{form.petitTitre.vars.id}}" value="{{form.petitTitre.vars.value}}"/>
+            <input type="text" placeholder="Le petit titre" class="form-control" name="{{form.petitTitre.vars.full_name}}" id="{{form.petitTitre.vars.id}}" value="{{form.petitTitre.vars.value}}"/>
             {% do
                 form.petitTitre.setRendered %}
             {% for error in form.petitTitre.vars.errors %}
 
-                <small class="text-muted">
+                <small class="text-danger">
                     {{error.message}}
                 </small>
             {% endfor %}
@@ -107,7 +79,7 @@
     <div class="form-group">
         <label for="{{form.apparitionP.vars.id}}" class="col-sm-2 control-label">Apparition</label>
         <div class="col-sm-10">
-            <select class="select2 form-control" name="{{form.apparitionP.vars.full_name}}" id="{{form.apparitionP.vars.id}}">
+            <select class="form-control"  name="{{form.apparitionP.vars.full_name}}" id="{{form.apparitionP.vars.id}}">
                 {% for app in apparitions %}
                     <option value="{{app.value}}">{{app.option}}</option>
                 {% endfor %}
@@ -116,7 +88,7 @@
                 form.apparitionP.setRendered %}
             {% for error in form.apparitionP.vars.errors %}
 
-                <small class="text-muted">
+                <small class="text-danger">
                     {{error.message}}
                 </small>
             {% endfor %}
@@ -129,10 +101,11 @@
             <div class="file-loading">
                 <input type="file" name="{{form.file.vars.full_name}}" id="{{form.file.vars.id}}">
             </div>
+            <span class="help-block">Les dimensions minimales sont de 1900x930.</span>
             {% do
                 form.file.setRendered %}
             {% for error in form.file.vars.errors %}
-                <small class="text-muted">
+                <small class="text-danger">
                     {{error.message}}
                 </small>
             {% endfor %}
@@ -143,4 +116,3 @@
     <button class="btn btn-success pull-right">{{ button_label|default('Enregistrer') }}</button>
     {{ form_end(form) }}
 </div>
-

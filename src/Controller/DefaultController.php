@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\SlideRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,9 +13,11 @@ class DefaultController extends Controller
     /**
      *@Route("/",name="home_page")
      */
-    public function index()
+    public function index(SlideRepository $slideRepository)
     {
-        return $this->render('landing/homepage.html.twig');
+        return $this->render('landing/homepage.html.twig', [
+            'slides' => $slideRepository->findAll(),
+        ]);
     }
     /**
      *@Route("/login_ok",name="login_ok")
